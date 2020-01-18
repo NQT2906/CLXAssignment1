@@ -23,7 +23,7 @@
 			<div class = "UserInput">
 				<input type = "number" class = "Input" id = "Input">
 				<button class = "Button" id = "GuessButton" onclick = "Compare()">Guess</button>
-				<button class = "Button" id = "Again" onclick = "Again()">Again</button>
+				<button class = "Button" id = "Again">Again</button>
 			</div>
 			
 			<div class = "Advertising">
@@ -35,6 +35,8 @@
 		</div>
 
 		<script>
+			document.getElementById("Again").addEventListener("click", Again);
+			
 			var Chance = 3;
 			var flag = 1;
 			let LuckyNumber = Math.floor(Math.random() * 10 + 1);
