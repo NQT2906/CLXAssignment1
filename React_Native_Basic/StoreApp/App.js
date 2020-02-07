@@ -15,9 +15,6 @@ export default function App() {
         <CategoryListItem title = {'Hoa cúc'} Image = {Cuc} />
         <CategoryListItem title = {'Hoa mai'} Image = {Mai} />
         <CategoryListItem title = {'Hoa sen'} Image = {Sen} />
-        <CategoryListItem title = {'Hoa cúc'} Image = {Cuc} />
-        <CategoryListItem title = {'Hoa mai'} Image = {Mai} />
-        <CategoryListItem title = {'Hoa sen'} Image = {Sen} />
       </ScrollView>
     </View>
   );
