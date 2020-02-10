@@ -1,16 +1,21 @@
-import React from 'react';
-import { Image, Text, View, StyleSheet } from 'react-native';
+import React from 'react'
 
+import
+{
+    Image,
+    Text,
+    View,
+    StyleSheet,
+} from 'react-native'
 
 export default function CategoryListItem(props)
 {
-    const { category } = props;
-    return (
-        <View style = {styles.container}>
-            <Text style = {styles.title}>{category.name}</Text>
-            <Image style = {styles.categoryImage} source = {category.image} />
-        </View>
-    );
+    return <View style = {styles.container}>
+        <Text style = {styles.title}>{props.title}</Text>
+        <Image 
+            style = {styles.categoryImage}
+            source = {props.Image} />
+    </View>
 }
 
 const styles = StyleSheet.create(

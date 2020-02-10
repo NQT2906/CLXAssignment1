@@ -1,0 +1,80 @@
+body
+{
+    background-image: linear-gradient(#00FFFF, rgb(255, 20, 196));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.Container
+{
+    margin-top: 150px;
+    text-align: center;
+    font-size: 30px;
+}
+
+/* Intro */
+
+    #GameName
+    {
+        background-color: rgb(255, 47, 10);
+    }
+
+    #Rules
+    {
+        background-color: yellow;
+    }
+
+/* Notify */
+
+    /* Error */
+    #Error
+    {
+        background-color: rgb(204, 10, 10);
+    }
+
+    /* Message */
+    #Lose
+    {
+        background-color:rgb(255, 47, 10);
+    }
+
+    #True
+    {
+        background-color: lawngreen;
+    }
+
+    #False
+    {
+        background-color: rgb(255, 47, 10);
+    }
+
+/* Button and Input and Ads */
+
+    .Button
+    {
+        font-size: 30px;
+        align-self: center;
+        background-color: rgb(0, 252, 63);
+    }
+
+    .Advertising
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #Ads
+    {
+        background-color: rgb(0, 252, 63);
+    }
+
+    .Input
+    {
+        font-size: 30px;
+    }
+
+#PastGuess
+{
+    background-color: yellow;
+}
