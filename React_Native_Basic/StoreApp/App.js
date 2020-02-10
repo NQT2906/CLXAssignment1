@@ -1,23 +1,32 @@
 import React from 'react';
-import { StyleSheet, Text, ScrollView, View} from 'react-native';
+import { StyleSheet, Text, ScrollView, View, FlatList} from 'react-native';
 import CategoryListItem from './components/CategoryListItem.js';
 import Cuc from './assets/Cuc.png';
 import Mai from './assets/Mai.png';
 import Sen from './assets/Sen.png';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      categories: [
+        {id: 1, name: 'Cúc', image: Cuc},
+        {id: 2, name: 'Mai', image: Mai},
+        {id: 3, name: 'Sen', image: Sen}
+      ]
+    }
+  };
+
+  render() {
+    const { categories } = this.state;
+    return (
       <ScrollView style = {{paddingLeft: 16, paddingRight: 16}}>
-        <CategoryListItem title = {'Hoa cúc'} Image = {Cuc} />
-        <CategoryListItem title = {'Hoa mai'} Image = {Mai} />
-        <CategoryListItem title = {'Hoa sen'} Image = {Sen} />
-        <CategoryListItem title = {'Hoa cúc'} Image = {Cuc} />
-        <CategoryListItem title = {'Hoa mai'} Image = {Mai} />
-        <CategoryListItem title = {'Hoa sen'} Image = {Sen} />
+        {categories.map( category => (
+          <CategoryListItem key = {category.id} category = {category} />
+        ))}
       </ScrollView>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
