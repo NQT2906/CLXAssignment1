@@ -25,6 +25,13 @@ export default class App extends React.Component {
           <CategoryListItem key = {category.id} category = {category} />
         ))}
       </ScrollView>
+      // Use FlatList to display list item of category 
+      // <FlatList 
+      //   data = {categories}
+      //   renderItem= {({ item }) => <CategoryListItem category = {item} />}
+      //   keyExtractor = {item => '${item.id}'}
+      //   contentContainerStyle ={{paddingLeft: 16, paddingRight: 16}}
+      // />
     );
   }
 }
