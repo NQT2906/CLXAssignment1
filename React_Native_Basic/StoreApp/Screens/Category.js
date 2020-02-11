@@ -1,11 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, ScrollView, View, FlatList} from 'react-native';
+import { StyleSheet, FlatList} from 'react-native';
 import CategoryListItem from './components/CategoryListItem.js';
 import Cuc from './assets/Cuc.png';
 import Mai from './assets/Mai.png';
 import Sen from './assets/Sen.png';
 
-export default class App extends React.Component {
+export default class Category extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,11 +25,6 @@ export default class App extends React.Component {
           <CategoryListItem key = {category.id} category = {category} />
         ))}
       </ScrollView>
-      // Use FlatList
-      // <FlatList
-      //     data= {categories}
-      //     renderItem = {({item}) => <CategoryListItem  category = {item} />}
-      //     keyExtractor={(item) => '${item.id}'} />
     );
   }
 }

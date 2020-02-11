@@ -1,15 +1,27 @@
 import React from 'react';
-import { Image, Text, View, StyleSheet } from 'react-native';
+import { Image, Text, View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 
 
 export default function CategoryListItem(props)
 {
     const { category } = props;
     return (
-        <View style = {styles.container}>
-            <Text style = {styles.title}>{category.name}</Text>
-            <Image style = {styles.categoryImage} source = {category.image} />
-        </View>
+        <TouchableOpacity activeOpacity={0.4} onPress={() => {
+            if(category.id == 1){
+                Alert.alert('Bạn đã chọn cúc!')
+            }
+            else if(category.id == 2){
+                Alert.alert('Bạn đã chọn mai!')
+            }
+            else{
+                Alert.alert('Bạn đã chọn sen!')
+            }
+        }}>
+            <View style = {styles.container}>
+                <Text style = {styles.title}>{category.name}</Text>
+                <Image style = {styles.categoryImage} source = {category.image} />
+            </View>
+        </TouchableOpacity>
     );
 }
 
