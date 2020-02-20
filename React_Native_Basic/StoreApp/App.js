@@ -1,38 +1,48 @@
 import React from 'react';
-import { StyleSheet, Text, ScrollView, View, FlatList} from 'react-native';
-import CategoryListItem from './components/CategoryListItem.js';
+import { StyleSheet, Text, ScrollView, View, FlatList, Navigator} from 'react-native';
+//import CategoryListItem from './components/CategoryListItem.js';
 import Cuc from './assets/Cuc.png';
 import Mai from './assets/Mai.png';
 import Sen from './assets/Sen.png';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator} from 'react-navigation-stack';
+import AppNavigator from './AppNavigator.js';
+
+const AppContainer = createAppContainer(AppNavigator);
+
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      categories: [
-        {id: 1, name: 'Cúc', image: Cuc},
-        {id: 2, name: 'Mai', image: Mai},
-        {id: 3, name: 'Sen', image: Sen}
-      ]
-    }
-  };
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     categories: [
+  //       {id: 1, name: 'Cúc', image: Cuc},
+  //       {id: 2, name: 'Mai', image: Mai},
+  //       {id: 3, name: 'Sen', image: Sen}
+  //     ]
+  //   }
+  // };
+
+  // render() {
+  //   const { categories } = this.state;
+  //   return (
+  //     <ScrollView style = {{paddingLeft: 16, paddingRight: 16}}>
+  //       {categories.map( category => (
+  //         <CategoryListItem key = {category.id} category = {category} />
+  //       ))}
+  //     </ScrollView>
+  //     // Use FlatList to display list item of category 
+  //     // <FlatList 
+  //     //   data = {categories}
+  //     //   renderItem= {({ item }) => <CategoryListItem category = {item} />}
+  //     //   keyExtractor = {item => '${item.id}'}
+  //     //   contentContainerStyle ={{paddingLeft: 16, paddingRight: 16}}
+  //     // />
+  //   );
+  // }
 
   render() {
-    const { categories } = this.state;
-    return (
-      <ScrollView style = {{paddingLeft: 16, paddingRight: 16}}>
-        {categories.map( category => (
-          <CategoryListItem key = {category.id} category = {category} />
-        ))}
-      </ScrollView>
-      // Use FlatList to display list item of category 
-      // <FlatList 
-      //   data = {categories}
-      //   renderItem= {({ item }) => <CategoryListItem category = {item} />}
-      //   keyExtractor = {item => '${item.id}'}
-      //   contentContainerStyle ={{paddingLeft: 16, paddingRight: 16}}
-      // />
-    );
+    return <AppContainer />;
   }
 }
 

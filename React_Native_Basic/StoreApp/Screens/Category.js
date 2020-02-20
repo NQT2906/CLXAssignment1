@@ -1,30 +1,18 @@
 import React from 'react';
-import { StyleSheet, FlatList} from 'react-native';
-import CategoryListItem from './components/CategoryListItem.js';
-import Cuc from './assets/Cuc.png';
-import Mai from './assets/Mai.png';
-import Sen from './assets/Sen.png';
+import { StyleSheet, View, Text} from 'react-native';
 
 export default class Category extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      categories: [
-        {id: 1, name: 'Cúc', image: Cuc},
-        {id: 2, name: 'Mai', image: Mai},
-        {id: 3, name: 'Sen', image: Sen}
-      ]
-    }
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('categoryName')
+    };
   };
 
   render() {
-    const { categories } = this.state;
     return (
-      <ScrollView style = {{paddingLeft: 16, paddingRight: 16}}>
-        {categories.map( category => (
-          <CategoryListItem key = {category.id} category = {category} />
-        ))}
-      </ScrollView>
+      <View>
+        <Text>Category</Text>
+      </View> 
     );
   }
 }

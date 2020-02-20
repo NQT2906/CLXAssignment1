@@ -4,19 +4,12 @@ import { Image, Text, View, StyleSheet, TouchableOpacity, Alert } from 'react-na
 
 export default function CategoryListItem(props)
 {
-    const { category } = props;
+    const { category, onPress } = props;
     return (
-        <TouchableOpacity activeOpacity={0.4} onPress={() => {
-            if(category.id == 1){
-                Alert.alert('Bạn đã chọn cúc!')
-            }
-            else if(category.id == 2){
-                Alert.alert('Bạn đã chọn mai!')
-            }
-            else{
-                Alert.alert('Bạn đã chọn sen!')
-            }
-        }}>
+        <TouchableOpacity 
+            activeOpacity={0.4} 
+            onPress= {onPress}
+        >
             <View style = {styles.container}>
                 <Text style = {styles.title}>{category.name}</Text>
                 <Image style = {styles.categoryImage} source = {category.image} />
