@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, FlatList, Text} from 'react-native';
+import { StyleSheet, View, FlatList, Text, Image} from 'react-native';
 import ProductListItem from '../components/ProductListItem';
 
 export default class Category extends React.Component {
@@ -56,7 +56,17 @@ export default class Category extends React.Component {
       //   keyExtractor = {item => '${item.id}'}
       // />
 
-      <View><Text>abc</Text></View>
+     <View>
+        <View><Text>{this.props.navigation.getParam('categoryName')}</Text></View>
+        <Text>{this.props.navigation.getParam('image')}</Text>
+        <Image style={{
+          width:300,
+          height:300
+        }} source={{
+          uri: this.props.navigation.getParam('image')
+        }} />
+      </View>
+
     ); 
   }
 }

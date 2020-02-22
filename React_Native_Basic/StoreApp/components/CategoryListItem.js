@@ -12,7 +12,7 @@ export default function CategoryListItem(props)
         >
             <View style = {styles.container}>
                 <Text style = {styles.title}>{category.name}</Text>
-                <Image style = {styles.categoryImage} source = {category.image} />
+                <Image style={styles.categoryImage} source={{ uri: category.image}} />
             </View>
         </TouchableOpacity>
     );

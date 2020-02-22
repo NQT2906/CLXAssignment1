@@ -16,9 +16,9 @@ export default class Categories extends React.Component {
     super(props);
     this.state = {
       categories: [
-        {id: 1, name: 'Cúc', image: Cuc},
-        {id: 2, name: 'Mai', image: Mai},
-        {id: 3, name: 'Sen', image: Sen},
+        { id: 1, name: 'Cúc', image: "https://imgur.com/TPji24F.jpg"},
+        { id: 2, name: 'Mai', image: "https://imgur.com/iRldAlv.jpg"},
+        { id: 3, name: 'Sen', image: "https://imgur.com/C5ZWHFB.jpg"},
       ]
     }
   };
@@ -34,7 +34,8 @@ export default class Categories extends React.Component {
           category = {item} 
           onPress = {() => 
             navigation.navigate('Category', {
-              categoryName: item.name,
+              categoryName: item.name,  
+              image: item.image
             })
           } />}
         keyExtractor = {(item) => '${item.id}'}
