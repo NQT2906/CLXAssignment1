@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, ScrollView, View, FlatList} from 'react-native';
 import CategoryListItem from '../components/CategoryListItem.js';
-import { createStackNavigator} from 'react-navigation-stack';
+import { createStackNavigator } from 'react-navigation-stack';
 
 import Cuc from '../assets/Cuc.png';
 import Mai from '../assets/Mai.png';
@@ -34,13 +34,28 @@ export default class Categories extends React.Component {
           category = {item} 
           onPress = {() => 
             navigation.navigate('Category', {
-              categoryName: item.name 
+              categoryName: item.name,
             })
           } />}
         keyExtractor = {(item) => '${item.id}'}
         contentContainerStyle ={styles.container}
       />
     );
+  // const { categories } = this.state;
+  // const { navigation } = this.props;
+  //   return (
+  //     <ScrollView style = {{paddingLeft: 16, paddingRight: 16}}>
+  //       {categories.map( category => (
+  //         <CategoryListItem 
+  //           key = {category.id} 
+  //           category = {category}
+  //           onPress = {() =>
+  //           navigation.navigate('Category', {
+  //               categoryName: category.name
+  //           })} />
+  //       ))}
+  //     </ScrollView>   
+  //   )
   }
 }
 
