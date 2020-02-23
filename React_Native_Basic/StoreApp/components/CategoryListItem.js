@@ -9,7 +9,11 @@ export default function CategoryListItem(props)
         <TouchableOpacity activeOpacity={0.4} onPress= {onPress}>
             <View style = {styles.container}>
                 <Text style = {styles.title}>{category.name}</Text>
+<<<<<<< HEAD
                 <Image style = {styles.categoryImage} source = { category.image } />
+=======
+                <Image style={styles.categoryImage} source={{ uri: category.image}} />
+>>>>>>> d28d95df60daf5c337e25cd6078f255eb334f7b0
             </View>
         </TouchableOpacity>
     );  

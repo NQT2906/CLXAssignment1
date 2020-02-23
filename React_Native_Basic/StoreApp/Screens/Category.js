@@ -1,6 +1,11 @@
 import React from 'react';
+<<<<<<< HEAD
 import { StyleSheet, View, FlatList } from 'react-native';
 import ProductListItem from '../components/ProductListItem.js';
+=======
+import { StyleSheet, View, FlatList, Text, Image} from 'react-native';
+import ProductListItem from '../components/ProductListItem';
+>>>>>>> d28d95df60daf5c337e25cd6078f255eb334f7b0
 
 export default class Category extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -74,6 +79,7 @@ export default class Category extends React.Component {
   render() {
     const { products } = this.state;
     return (
+<<<<<<< HEAD
       <View>
         <View>
           <FlatList 
@@ -87,6 +93,26 @@ export default class Category extends React.Component {
             contentContainerStyle ={styles.container} />
         </View>
       </View>
+=======
+      // <FlatList 
+      //   data = {this.state.products}
+      //   numColumns= {2}
+      //   renderItem = {({item}) => <ProductListItem product = {item} />}
+      //   keyExtractor = {item => '${item.id}'}
+      // />
+
+     <View>
+        <View><Text>{this.props.navigation.getParam('categoryName')}</Text></View>
+        <Text>{this.props.navigation.getParam('image')}</Text>
+        <Image style={{
+          width:300,
+          height:300
+        }} source={{
+          uri: this.props.navigation.getParam('image')
+        }} />
+      </View>
+
+>>>>>>> d28d95df60daf5c337e25cd6078f255eb334f7b0
     ); 
   }
 }
