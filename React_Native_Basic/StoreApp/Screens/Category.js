@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, FlatList, Text} from 'react-native';
-import ProductListItem from '../components/ProductListItem';
+import { StyleSheet, View, FlatList } from 'react-native';
+import ProductListItem from '../components/ProductListItem.js';
 
 export default class Category extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -15,31 +15,55 @@ export default class Category extends React.Component {
       products: [
         {
           id: 1,
-          image: [
-            {
-              url: 'https://imgur.com/TPji24F.jpg'
-            }
-          ],
+          image: 'https://imgur.com/TPji24F.jpg',
           name: 'Cúc',
           price: '50000'
         },
         {
           id: 2,
-          image: [
-            {
-              url: 'https://imgur.com/iRldAlv.jpg'
-            }
-          ],
+          image: 'https://imgur.com/iRldAlv.jpg',
           name: 'Mai',
           price: '100000'
         },
         {
           id: 3,
-          image: [
-            {
-              url: 'https://imgur.com/C5ZWHFB.jpg'
-            }
-          ],
+          image: 'https://imgur.com/C5ZWHFB.jpg',
+          name: 'Sen',
+          price: '150000'
+        },
+        {
+          id: 4,
+          image: 'https://imgur.com/TPji24F.jpg',
+          name: 'Cúc',
+          price: '50000'
+        },
+        {
+          id: 5,
+          image: 'https://imgur.com/iRldAlv.jpg',
+          name: 'Mai',
+          price: '100000'
+        },
+        {
+          id: 6,
+          image: 'https://imgur.com/C5ZWHFB.jpg',
+          name: 'Sen',
+          price: '150000'
+        },
+        {
+          id: 7,
+          image: 'https://imgur.com/TPji24F.jpg',
+          name: 'Cúc',
+          price: '50000'
+        },
+        {
+          id: 8,
+          image: 'https://imgur.com/iRldAlv.jpg',
+          name: 'Mai',
+          price: '100000'
+        },
+        {
+          id: 9,
+          image: 'https://imgur.com/C5ZWHFB.jpg',
           name: 'Sen',
           price: '150000'
         },
@@ -48,27 +72,32 @@ export default class Category extends React.Component {
   };
   
   render() {
+    const { products } = this.state;
     return (
-      // <FlatList 
-      //   data = {this.state.products}
-      //   numColumns= {2}
-      //   renderItem = {({item}) => <ProductListItem product = {item} />}
-      //   keyExtractor = {item => '${item.id}'}
-      // />
-
-      <View><Text>abc</Text></View>
+      <View>
+        <View>
+          <FlatList 
+            data = {products}
+            numColumns = {2}
+            renderItem = {({item}) => 
+              <View style = {styles.wrapper}>
+                <ProductListItem product = {item} />
+              </View> }
+            keyExtractor = {item => '${item.id}'}
+            contentContainerStyle ={styles.container} />
+        </View>
+      </View>
     ); 
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    elevation: 1,
-    alignItems: 'stretch',
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    paddingLeft: 16,
-    paddingRight: 16,
+    paddingHorizontal: 8,
+    paddingVertical: 16
   },
+  wrapper: {
+    flex: 0.5,
+    paddingHorizontal: 8
+  }
 });

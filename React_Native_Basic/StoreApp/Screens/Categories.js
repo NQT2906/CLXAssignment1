@@ -1,7 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, ScrollView, View, FlatList} from 'react-native';
+import { StyleSheet, FlatList} from 'react-native';
 import CategoryListItem from '../components/CategoryListItem.js';
-import { createStackNavigator } from 'react-navigation-stack';
 
 import Cuc from '../assets/Cuc.png';
 import Mai from '../assets/Mai.png';
@@ -16,12 +15,12 @@ export default class Categories extends React.Component {
     super(props);
     this.state = {
       categories: [
-        {id: 1, name: 'Cúc', image: Cuc},
-        {id: 2, name: 'Mai', image: Mai},
-        {id: 3, name: 'Sen', image: Sen},
+        { id: 1, name: 'Cúc', image: Cuc},
+        { id: 2, name: 'Mai', image: Mai},
+        { id: 3, name: 'Sen', image: Sen},
       ]
-    }
-  };
+    };
+  }
 
   render() {
     const { navigation } = this.props;
@@ -37,7 +36,7 @@ export default class Categories extends React.Component {
               categoryName: item.name,
             })
           } />}
-        keyExtractor = {(item) => '${item.id}'}
+        keyExtractor = {item => '${item.id}'}
         contentContainerStyle ={styles.container}
       />
     );

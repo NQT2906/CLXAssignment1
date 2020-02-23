@@ -7,22 +7,21 @@ export default function ProductListItem(props) {
     const { product, onAddToCartClick } = props;
 
     return (
-        <View style = {styles.shadow}>
-            <View style = { styles.container }>
-                <Image style = {styles.img} source = {{ url: product.images[0].url }} />
-                <View style = {styles.info} >
-                    <Text style = {styles.name}> {product.name} </Text>
-                    <View style = {styles.priceRow}>
-                        {/* <Text style = {styles.price} > {formatPrice(product.price)}</Text> */}
-                        <TouchableOpacity onPress = {onAddToCartClick}>
-                            <Text style = {styles.cartText} >MUA +</Text>
+        <View style={styles.shadow}>
+            <View style={styles.container}>
+                <Image style={styles.img} source={{uri: product.image}}/>
+                <View style={styles.info}>
+                    <Text style={styles.name}>{product.name}</Text>
+                    <View style={styles.priceRow}>
+                        <Text style={styles.price}>{product.price}</Text>
+                        <TouchableOpacity onPress={onAddToCartClick}>
+                            <Text style={styles.cartText}>Mua +</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
-                }
             </View>
         </View>
-    )
+    );
 }
 
 const styles = StyleSheet.create({
@@ -48,6 +47,7 @@ const styles = StyleSheet.create({
 
     img: {
         height: 150,
+        width: 150,
         borderTopLeftRadius: 4,
         borderBottomLeftRadius: 4,
     },

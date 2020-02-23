@@ -6,16 +6,13 @@ export default function CategoryListItem(props)
 {
     const { category, onPress } = props;
     return (
-        <TouchableOpacity 
-            activeOpacity={0.4} 
-            onPress= {onPress}
-        >
+        <TouchableOpacity activeOpacity={0.4} onPress= {onPress}>
             <View style = {styles.container}>
                 <Text style = {styles.title}>{category.name}</Text>
-                <Image style = {styles.categoryImage} source = {category.image} />
+                <Image style = {styles.categoryImage} source = { category.image } />
             </View>
         </TouchableOpacity>
-    );
+    );  
 }
 
 
