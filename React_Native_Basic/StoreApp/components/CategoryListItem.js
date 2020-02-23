@@ -1,51 +1,72 @@
 import React from 'react';
-import { Image, Text, View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, FlatList} from 'react-native';
+import CategoryListItem from '../components/CategoryListItem.js';
 
+import Cuc from '../assets/Cuc.png';
+import Mai from '../assets/Mai.png';
+import Sen from '../assets/Sen.png';
 
-export default function CategoryListItem(props)
-{
-    const { category, onPress } = props;
+export default class Categories extends React.Component {
+  static navigationOptions = {
+    title: 'Home',
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      categories: [
+        { id: 1, name: 'Cúc', image: Cuc},
+        { id: 2, name: 'Mai', image: Mai},
+        { id: 3, name: 'Sen', image: Sen},
+      ]
+    };
+  }
+
+  render() {
+    const { navigation } = this.props;
+    const { categories } = this.state;
     return (
-        <TouchableOpacity activeOpacity={0.4} onPress= {onPress}>
-            <View style = {styles.container}>
-                <Text style = {styles.title}>{category.name}</Text>
-<<<<<<< HEAD
-                <Image style = {styles.categoryImage} source = { category.image } />
-=======
-                <Image style={styles.categoryImage} source={{ uri: category.image}} />
->>>>>>> d28d95df60daf5c337e25cd6078f255eb334f7b0
-            </View>
-        </TouchableOpacity>
-    );  
+      <FlatList 
+        data = {categories}
+        renderItem= {({ item }) => 
+        <CategoryListItem 
+          category = {item} 
+          onPress = {() => 
+            navigation.navigate('Category', {
+              categoryName: item.name,
+            })
+          } />}
+        keyExtractor = {item => '${item.id}'}
+        contentContainerStyle ={styles.container}
+      />
+    );
+  // const { categories } = this.state;
+  // const { navigation } = this.props;
+  //   return (
+  //     <ScrollView style = {{paddingLeft: 16, paddingRight: 16}}>
+  //       {categories.map( category => (
+  //         <CategoryListItem 
+  //           key = {category.id} 
+  //           category = {category}
+  //           onPress = {() =>
+  //           navigation.navigate('Category', {
+  //               categoryName: category.name
+  //           })} />
+  //       ))}
+  //     </ScrollView>   
+  //   )
+  }
 }
 
-
-
-const styles = StyleSheet.create(
-    {
-        container:
-        {
-            alignItems: 'center',
-            padding: 16,
-            elevation: 1,
-            borderRadius: 50,
-            backgroundColor: '#FFF',
-            shadowColor: '#000',
-            shadowOpacity: 0.3,
-            shadowRadius: 10,
-            shadowOffset: { width: 0, height: 0},
-            marginBottom: 16
-        },
-        categoryImage:
-        {
-            width: 120,
-            height: 120
-        },
-        title:
-        {
-            textTransform: 'uppercase',
-            marginBottom: 8,
-            fontWeight: '700'
-        },
-    }
-)
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    elevation: 1,
+    alignItems: 'stretch',
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    paddingTop: 16,
+    paddingLeft: 16,
+    paddingRight: 16,
+  },
+});
