@@ -26,6 +26,7 @@ export default class Categories extends React.Component {
     const { navigation } = this.props;
     const { categories } = this.state;
     return (
+<<<<<<< HEAD
       <FlatList 
         data = {categories}
         renderItem= {({ item }) => 
@@ -39,6 +40,17 @@ export default class Categories extends React.Component {
         keyExtractor = {item => '${item.id}'}
         contentContainerStyle ={styles.container}
       />
+=======
+        <TouchableOpacity 
+            activeOpacity={0.4} 
+            onPress= {onPress}
+        >
+            <View style = {styles.container}>
+                <Text style = {styles.title}>{category.name}</Text>
+                <Image style = {styles.categoryImage} source = {category.image} />
+            </View>
+        </TouchableOpacity>
+>>>>>>> parent of d28d95d... Fix error pass arg
     );
   // const { categories } = this.state;
   // const { navigation } = this.props;

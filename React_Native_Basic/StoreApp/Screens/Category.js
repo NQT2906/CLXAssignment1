@@ -1,6 +1,11 @@
 import React from 'react';
+<<<<<<< HEAD
 import { StyleSheet, View, FlatList } from 'react-native';
 import ProductListItem from '../components/ProductListItem.js';
+=======
+import { StyleSheet, View, FlatList, Text} from 'react-native';
+import ProductListItem from '../components/ProductListItem';
+>>>>>>> parent of d28d95d... Fix error pass arg
 
 export default class Category extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -74,6 +79,7 @@ export default class Category extends React.Component {
   render() {
     const { products } = this.state;
     return (
+<<<<<<< HEAD
       <View>
         <View>
           <FlatList 
@@ -87,6 +93,16 @@ export default class Category extends React.Component {
             contentContainerStyle ={styles.container} />
         </View>
       </View>
+=======
+      // <FlatList 
+      //   data = {this.state.products}
+      //   numColumns= {2}
+      //   renderItem = {({item}) => <ProductListItem product = {item} />}
+      //   keyExtractor = {item => '${item.id}'}
+      // />
+
+      <View><Text>abc</Text></View>
+>>>>>>> parent of d28d95d... Fix error pass arg
     ); 
   }
 }
