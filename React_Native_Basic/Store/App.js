@@ -5,6 +5,7 @@ import Cuc from './assets/Cuc.png';
 import Mai from './assets/Mai.png';
 import Sen from './assets/Sen.png';
 import { createAppContainer } from 'react-navigation';
+import { createStackNavigator} from 'react-navigation-stack';
 import AppNavigator from './AppNavigator.js';
 
 const AppContainer = createAppContainer(AppNavigator);

@@ -33,7 +33,7 @@ export default class Categories extends React.Component {
           category = {item} 
           onPress = {() => 
             navigation.navigate('Category', {
-              categoryName: item.name,  
+              categoryName: item.name,
             })
           } />}
         keyExtractor = {item => '${item.id}'}
