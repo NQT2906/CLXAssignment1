@@ -1,0 +1,74 @@
+{
+  "categories": [
+      {
+          "id": 1, 
+          "name": "Cúc", 
+          "image": "https://imgur.com/TPji24F.jpg"
+      },
+      {   "id": 2, 
+          "name": "Mai", 
+          "image": "https://imgur.com/iRldAlv.jpg"
+      },
+      {
+          "id": 3, 
+          "name": "Sen", 
+          "image": "https://imgur.com/C5ZWHFB.jpg"
+      }
+  ],
+  "products": [
+      {
+        "id": 1,
+        "image": "https://imgur.com/TPji24F.jpg",
+        "name": "Cúc",
+        "price": "50000"
+      },
+      {
+        "id": 2,
+        "image": "https://imgur.com/iRldAlv.jpg",
+        "name": "Mai",
+        "price": "100000"
+      },
+      {
+        "id": 3,
+        "image": "https://imgur.com/C5ZWHFB.jpg",
+        "name": "Sen",
+        "price": "150000"
+      },
+      {
+        "id": 4,
+        "image": "https://imgur.com/TPji24F.jpg",
+        "name": "Cúc",
+        "price": "50000"
+      },
+      {
+        "id": 5,
+        "image": "https://imgur.com/iRldAlv.jpg",
+        "name": "Mai",
+        "price": "100000"
+      },
+      {
+        "id": 6,
+        "image": "https://imgur.com/C5ZWHFB.jpg",
+        "name": "Sen",
+        "price": "150000"
+      },
+      {
+        "id": 7,
+        "image": "https://imgur.com/TPji24F.jpg",
+        "name": "Cúc",
+        "price": "50000"
+      },
+      {
+        "id": 8,
+        "image": "https://imgur.com/iRldAlv.jpg",
+        "name": "Mai",
+        "price": "100000"
+      },
+      {
+        "id": 9,
+        "image": "https://imgur.com/C5ZWHFB.jpg",
+        "name": "Sen",
+        "price": "150000"
+      }
+    ]
+}

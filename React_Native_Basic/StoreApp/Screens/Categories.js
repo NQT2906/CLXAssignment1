@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { StyleSheet, FlatList} from 'react-native';
 import CategoryListItem from '../components/CategoryListItem.js';
 
@@ -14,12 +15,20 @@ export default class Categories extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: [
-        {id: 1, name: 'Cúc', image: Cuc},
-        {id: 2, name: 'Mai', image: Mai},
-        {id: 3, name: 'Sen', image: Sen},
-      ]
+      categories: []
     };
+  }
+
+  componentDidMount() {
+    axios.get("http://localhost:3000/categories")
+      .then(res => { 
+        this.setState({
+          categories: res.data
+        })
+      })
+      .catch(error => {
+        console.error(error)
+      })
   }
 
   render() {
