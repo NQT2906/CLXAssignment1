@@ -7,6 +7,8 @@ import Cuc from '../assets/Cuc.png';
 import Mai from '../assets/Mai.png';
 import Sen from '../assets/Sen.png';
 
+axios.defaults.baseURL = "https://my-json-server.typicode.com/nqt2906/demo/";
+
 export default class Categories extends React.Component {
   static navigationOptions = {
     title: 'Home',
@@ -20,8 +22,8 @@ export default class Categories extends React.Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:3000/categories")
-      .then(res => { 
+    axios.get("categories")
+      .then((res) => { 
         this.setState({
           categories: res.data
         })
@@ -42,7 +44,8 @@ export default class Categories extends React.Component {
           category = {item} 
           onPress = {() => 
             navigation.navigate('Category', {
-              categoryName: item.name,  
+              categoryName: item.name,
+              categorySpecies: item.id,
             })
           } />}
         keyExtractor = {item => '${item.id}'}

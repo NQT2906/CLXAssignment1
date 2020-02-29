@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import ProductListItem from '../components/ProductListItem.js';
+import axios from 'axios';
+
+axios.defaults.baseURL = "https://my-json-server.typicode.com/nqt2906/demo/";
 
 export default class Category extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -12,65 +15,28 @@ export default class Category extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: [
-        {
-          id: 1,
-          image: 'https://imgur.com/TPji24F.jpg',
-          name: 'Cúc',
-          price: '50000'
-        },
-        {
-          id: 2,
-          image: 'https://imgur.com/iRldAlv.jpg',
-          name: 'Mai',
-          price: '100000'
-        },
-        {
-          id: 3,
-          image: 'https://imgur.com/C5ZWHFB.jpg',
-          name: 'Sen',
-          price: '150000'
-        },
-        {
-          id: 4,
-          image: 'https://imgur.com/TPji24F.jpg',
-          name: 'Cúc',
-          price: '50000'
-        },
-        {
-          id: 5,
-          image: 'https://imgur.com/iRldAlv.jpg',
-          name: 'Mai',
-          price: '100000'
-        },
-        {
-          id: 6,
-          image: 'https://imgur.com/C5ZWHFB.jpg',
-          name: 'Sen',
-          price: '150000'
-        },
-        {
-          id: 7,
-          image: 'https://imgur.com/TPji24F.jpg',
-          name: 'Cúc',
-          price: '50000'
-        },
-        {
-          id: 8,
-          image: 'https://imgur.com/iRldAlv.jpg',
-          name: 'Mai',
-          price: '100000'
-        },
-        {
-          id: 9,
-          image: 'https://imgur.com/C5ZWHFB.jpg',
-          name: 'Sen',
-          price: '150000'
-        },
-      ]
+      products: []
     }
   };
   
+  componentDidMount() {
+    const { navigation } = this.props;
+    const { categorySpecies } = navigation.getParam("categorySpecies", "0");
+    const s = 'products?species=${categorySpecies}';
+    console.log(s);
+    //axios.get('products?species=1')
+    axios.get('products?')
+      .then(res => {
+        this.setState({
+          products: res.data
+          //product: res.data
+        })
+      })
+      .catch(error => {
+        console.error(error)
+      });
+  }
+
   render() {
     const { products } = this.state;
     return (
