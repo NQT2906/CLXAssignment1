@@ -1,28 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
- 
-// import { formatPrice } from '..utils/Number.js'; 
+import { connect } from 'react-redux'
+import { combineReducers, compose } from 'redux';
 
 export default function ProductListItem(props) {
-    const { product, onAddToCartClick } = props;
-
-    return (
-        <View style={styles.shadow}>
-            <View style={styles.container}>
-                <Image style={styles.img} source={{uri: product.image}}/>
-                <View style={styles.info}>
-                    <Text style={styles.name}>{product.name}</Text>
-                    <View style={styles.priceRow}>
-                        <Text style={styles.price}>{product.price}</Text>
-                        <TouchableOpacity onPress={onAddToCartClick}>
-                            <Text style={styles.cartText}>Mua +</Text>
-                        </TouchableOpacity>
+    
+    //render () {
+        const { product } = props;
+        return (
+            <View style={styles.shadow}>
+                <View style={styles.container}>
+                    <Image style={styles.img} source={{uri: product.image}}/>
+                    <View style={styles.info}>
+                        <Text style={styles.name}>{product.name}</Text>
+                        <View style={styles.priceRow}>
+                            <Text style={styles.price}>{product.price}</Text>
+                            <TouchableOpacity onPress={props.addItemToCart}>
+                                <Text style={styles.cartText}>Mua +</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </View>
-        </View>
-    );
+        );
+    //}
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addItemToCart: (product) => dispatch({type: 'ADD_TO_CART', payload: product})
+    }
+}
+
+//export default ProductListItem;
 
 const styles = StyleSheet.create({
     cartText: {

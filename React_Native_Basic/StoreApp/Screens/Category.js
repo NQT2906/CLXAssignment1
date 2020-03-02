@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 import ProductListItem from '../components/ProductListItem.js';
 import axios from 'axios';
+import { connect } from 'react-redux'
 
 axios.defaults.baseURL = "https://my-json-server.typicode.com/nqt2906/demo/";
 
@@ -20,12 +21,12 @@ export default class Category extends React.Component {
   };
   
   componentDidMount() {
-    const { navigation } = this.props;
-    const { categorySpecies } = navigation.getParam("categorySpecies", "0");
-    const s = 'products?species=${categorySpecies}';
-    console.log(s);
+    // const { navigation } = this.props;
+    // const { categorySpecies } = navigation.getParam("categorySpecies", "0");
+    // const s = 'products?species=${categorySpecies}';
+    // console.log(s);
     //axios.get('products?species=1')
-    axios.get('products?')
+    axios.get('products')
       .then(res => {
         this.setState({
           products: res.data
@@ -53,15 +54,10 @@ export default class Category extends React.Component {
             contentContainerStyle ={styles.container} />
         </View>
       </View>
-      // <FlatList 
-      //   data = {this.state.products}
-      //   numColumns= {2}
-      //   renderItem = {({item}) => <ProductListItem product = {item} />}
-      //   keyExtractor = {item => '${item.id}'}
-      // />
     ); 
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {

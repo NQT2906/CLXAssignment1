@@ -26,13 +26,17 @@
     "react-native-web": "~0.11.7",
     "react-navigation": "^4.1.1",
     "react-navigation-stack": "^2.1.1",
-    "react-navigation-tabs": "^2.8.1"
+    "react-navigation-tabs": "^2.8.1",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "axios": "^0.19.2"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "axios": "^0.19.2",
     "babel-preset-expo": "~8.0.0",
-    "json-server": "^0.16.1"
+    "json-server": "^0.16.1",
+    "redux-devtools": "^3.5.0"
   },
   "private": true
 }

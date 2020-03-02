@@ -6,6 +6,9 @@ import Mai from './assets/Mai.png';
 import Sen from './assets/Sen.png';
 import { createAppContainer } from 'react-navigation';
 import AppNavigator from './AppNavigator.js';
+import { Provider } from 'react-redux'
+import store from './store'
+
 
 const AppContainer = createAppContainer(AppNavigator);
 
@@ -41,7 +44,11 @@ export default class App extends React.Component {
   // }
 
   render() {
-    return <AppContainer />;
+    return (
+      <Provider store = {store}>
+        <AppContainer />
+      </Provider>
+    );
   }
 }
 

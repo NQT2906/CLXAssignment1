@@ -3,9 +3,9 @@ import axios from 'axios';
 import { StyleSheet, FlatList} from 'react-native';
 import CategoryListItem from '../components/CategoryListItem.js';
 
-import Cuc from '../assets/Cuc.png';
-import Mai from '../assets/Mai.png';
-import Sen from '../assets/Sen.png';
+// import Cuc from '../assets/Cuc.png';
+// import Mai from '../assets/Mai.png';
+// import Sen from '../assets/Sen.png';
 
 axios.defaults.baseURL = "https://my-json-server.typicode.com/nqt2906/demo/";
 
