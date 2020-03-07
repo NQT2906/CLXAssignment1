@@ -4,20 +4,19 @@ import {
     Text,
     StyleSheet
 } from "react-native";
-import ProductListItem from '../components/ProductListItem.js'
+import ProductInCart from '../components/ProductInCart.js'
 import { connect } from 'react-redux'
 
 class Cart extends Component {
 
     render() {
-        console.log(this.props.cartItems)
+        console.log(this.props.cartItems.id)
 
         return (
             <View style={styles.container}>
                 {this.props.cartItems.length > 0 ?
-                    <ProductListItem
-                        onPress={this.props.removeItem}
-                        products={this.props.cartItems} />
+                    <ProductInCart
+                        product ={this.props.cartItems} />
                     : <Text>No items in your cart</Text>
                 }
             </View>
@@ -31,14 +30,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        removeItem: (product) => dispatch({ type: 'REMOVE_FROM_CART', payload: product })
-    }
-}
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps)(Cart);
 
 const styles = StyleSheet.create({
     container: {

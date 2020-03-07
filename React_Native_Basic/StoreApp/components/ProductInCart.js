@@ -2,33 +2,30 @@ import React, { Component } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import { connect } from 'react-redux'
 
-function ProductListItem (props){
-    const { product, addItemToCart } = props;
+function ProductInCart (props){
+    const { product } = props;
     return (
-        <View style={styles.shadow}>
-            <View style={styles.container}>
-                <Image style={styles.img} source={{uri: product.image}}/>
-                <View style={styles.info}>
-                    <Text style={styles.name}>{product.name}</Text>
-                    <View style={styles.priceRow}>
-                        <Text style={styles.price}>{product.price}</Text>
-                        <TouchableOpacity onPress = {() => addItemToCart(product)} >
-                            <Text style={styles.cartText}>Mua +</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </View>
+        <View>
+            <Text>{product.species}</Text>
         </View>
     );
 }
 
-const mapDispatchToProps = (dispatch) => {
+export default ProductInCart;
+
+const mapStateToProps = (state) => {
     return {
-        addItemToCart: (product) => dispatch({type: 'ADD_TO_CART', payload: product})
+        cartItems: state
     }
 }
 
-export default connect(null, mapDispatchToProps)(ProductListItem);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        removeItem: (product) => dispatch({ type: 'REMOVE_FROM_CART', payload: product })
+    }
+}
+
+//export default connect(mapStateToProps)(ProductInCart);
 
 
 const styles = StyleSheet.create({
