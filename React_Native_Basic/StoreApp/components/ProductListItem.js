@@ -1,38 +1,38 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import { connect } from 'react-redux'
+
 import { combineReducers, compose } from 'redux';
+import { onSessionInterruptionEnded } from 'expo/build/AR';
 
 export default function ProductListItem(props) {
     
-    //render () {
-        const { product } = props;
-        return (
-            <View style={styles.shadow}>
-                <View style={styles.container}>
-                    <Image style={styles.img} source={{uri: product.image}}/>
-                    <View style={styles.info}>
-                        <Text style={styles.name}>{product.name}</Text>
-                        <View style={styles.priceRow}>
-                            <Text style={styles.price}>{product.price}</Text>
-                            <TouchableOpacity onPress={props.addItemToCart}>
-                                <Text style={styles.cartText}>Mua +</Text>
-                            </TouchableOpacity>
-                        </View>
+    const { product, addItemConnected } = props;
+    return (
+        <View style={styles.shadow}>
+            <View style={styles.container}>
+                <Image style={styles.img} source={{uri: product.image}}/>
+                <View style={styles.info}>
+                    <Text style={styles.name}>{product.name}</Text>
+                    <View style={styles.priceRow}>
+                        <Text style={styles.price}>{product.price}</Text>
+                        <TouchableOpacity onpress = {(product) => onPress(product) } >
+                            <Text style={styles.cartText}>Mua +</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
-        );
-    //}
+        </View>
+    );
 }
-
+    
 const mapDispatchToProps = (dispatch) => {
     return {
         addItemToCart: (product) => dispatch({type: 'ADD_TO_CART', payload: product})
     }
 }
 
-//export default ProductListItem;
+const addItemConnected = connect(null, mapDispatchToProps)(ProductListItem);
 
 const styles = StyleSheet.create({
     cartText: {

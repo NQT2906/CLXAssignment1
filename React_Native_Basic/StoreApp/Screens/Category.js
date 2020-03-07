@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 axios.defaults.baseURL = "https://my-json-server.typicode.com/nqt2906/demo/";
 
-export default class Category extends React.Component {
+class Category extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.getParam('categoryName', 'Category')
@@ -48,7 +48,8 @@ export default class Category extends React.Component {
             numColumns = {2}
             renderItem = {({item}) => 
               <View style = {styles.wrapper}>
-                <ProductListItem product = {item} />
+                <ProductListItem product = {item}
+                 onpress = {this.props.addItemToCart} />
               </View> }
             keyExtractor = {item => '${item.id}'}
             contentContainerStyle ={styles.container} />
@@ -58,6 +59,13 @@ export default class Category extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+      addItemToCart: (product) => dispatch({type: 'ADD_TO_CART', payload: product})
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Category);
 
 const styles = StyleSheet.create({
   container: {

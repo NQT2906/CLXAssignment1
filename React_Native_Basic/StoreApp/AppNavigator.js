@@ -8,10 +8,8 @@ import Categories from './Screens/Categories.js';
 import Cart from './Screens/Cart.js';
 import Orders from './Screens/Orders.js';
 import Settings from './Screens/Settings.js';
-import ShoppingCartIcon from './Screens/ShoppingCartIcon.js'
 import { connect } from 'react-redux'
-import { withNavigation } from 'react-navigation';
-
+import store from './store'
 
 const CategoryStack = createStackNavigator({
     Categories: {
@@ -39,29 +37,32 @@ const CartStack = createStackNavigator({
     Cart
 })
 
-// CartStack.navigationOptions = () => {
-//     return <View><ShoppingCartIcon /></View>
-// }
+const CartIcon = function(props) {
+    let { focused, cartItems } = props
+    return (
+        <View style = {{padding : 5}}>
+            <Ionicons name="ios-cart"  size={36} color = {focused ? color.ACTIVE : color.INACTIVE}/>
+            <View style = {{
+                position: "absolute", height: 30, width: 30, borderRadius: 15,
+                backgroundColor: '#rgba(95,197,123,0.8)', right: -15, bottom: 15,
+                alignItems: 'center', justifyContent: 'center', zIndex: 2000 }}>
+                <Text style = {{color: 'white', fontWeight: 'bold'}}>{cartItems.length}</Text>
+            </View>
+        </View>
+    )
+}
+
+const mapStateToProps = (state) => {
+    return {
+        cartItems: state
+    }
+}
+const CartIconConnected = connect(mapStateToProps)(CartIcon)
+
 CartStack.navigationOptions = {
     tabBarLabel: 'Cart',
     tabBarIcon: ({ focused }) => {
-        return (
-            <View style = {{padding : 5}}>
-                <Ionicons name="ios-cart"  size={36} color = {focused ? color.ACTIVE : color.INACTIVE}/>
-                <View style = {{
-                    position: "absolute", height: 30, width: 30, borderRadius: 15,
-                    backgroundColor: '#rgba(95,197,123,0.8)', right: -15, bottom: 15, alignItems: 'center',
-                    justifyContent: 'center', zIndex: 2000
-                }}>
-                    <Text style = {{color: 'white', fontWeight: 'bold'}}>{this.props.cartItems}</Text>
-                </View>
-            </View>
-        );
-        const mapStateToProps = (state) => {
-            return {
-                cartItems: state
-            }   
-        }
+        return <CartIconConnected focused={focused} />
     }
 }
 
