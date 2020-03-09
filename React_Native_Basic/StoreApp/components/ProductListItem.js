@@ -22,6 +22,12 @@ function ProductListItem (props){
     );
 }
 
+// const mapStateToProps = () => {
+//     return {
+//         car
+//     }
+// }
+
 const mapDispatchToProps = (dispatch) => {
     return {
         addItemToCart: (product) => dispatch({type: 'ADD_TO_CART', payload: product})
@@ -39,6 +45,7 @@ const styles = StyleSheet.create({
     },
 
     shadow: {
+        elevation: 1,
         shadowColor: '#000',
         shadowOpacity: 0.1,
         shadowRadius: 10,

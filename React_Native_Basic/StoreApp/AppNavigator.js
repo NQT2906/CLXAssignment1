@@ -39,6 +39,9 @@ const CartStack = createStackNavigator({
 
 const CartIcon = function(props) {
     let { focused, cartItems } = props
+    const totalProduct = cartItems.reduce(function(accumulator, currentValue) {
+        return accumulator + currentValue.quantity;
+    }, 0)
     return (
         <View style = {{padding : 5}}>
             <Ionicons name="ios-cart"  size={36} color = {focused ? color.ACTIVE : color.INACTIVE}/>
@@ -46,7 +49,12 @@ const CartIcon = function(props) {
                 position: "absolute", height: 30, width: 30, borderRadius: 15,
                 backgroundColor: '#rgba(95,197,123,0.8)', right: -15, bottom: 15,
                 alignItems: 'center', justifyContent: 'center', zIndex: 2000 }}>
-                <Text style = {{color: 'white', fontWeight: 'bold'}}>{cartItems.length}</Text>
+                <Text style = {{color: 'white', fontWeight: 'bold'}}>
+                    {cartItems.length > 0?
+                        <Text>{totalProduct}</Text>
+                        : <Text>0</Text>}
+                </Text>
+                {/* <Text style = {{color: 'white', fontWeight: 'bold'}}>{cartItems.total}</Text> */}
             </View>
         </View>
     )
@@ -54,7 +62,8 @@ const CartIcon = function(props) {
 
 const mapStateToProps = (state) => {
     return {
-        cartItems: state
+        cartItems: store.getState().cartItems,
+        orderItems: store.getState().orderItems
     }
 }
 const CartIconConnected = connect(mapStateToProps)(CartIcon)
@@ -66,6 +75,31 @@ CartStack.navigationOptions = {
     }
 }
 
+const OrderIcon = function(props) {
+    let { focused, orderItems } = props
+    const totalOrder = orderItems.reduce(function(accumulator) {
+        return accumulator + 1;
+    }, 0)
+    return (
+        <View style = {{padding : 5}}>
+            <Ionicons name="ios-albums"  size={36} color = {focused ? color.ACTIVE : color.INACTIVE}/>
+            <View style = {{
+                position: "absolute", height: 30, width: 30, borderRadius: 15,
+                backgroundColor: '#rgba(95,197,123,0.8)', right: -15, bottom: 15,
+                alignItems: 'center', justifyContent: 'center', zIndex: 2000 }}>
+                <Text style = {{color: 'white', fontWeight: 'bold'}}>
+                    {orderItems.length > 0?
+                        <Text>{totalOrder}</Text>
+                        : <Text>0</Text>}
+                </Text>
+                {/* <Text style = {{color: 'white', fontWeight: 'bold'}}>{cartItems.total}</Text> */}
+            </View>
+        </View>
+    )
+}
+
+const OrderIconConnected = connect(mapStateToProps)(OrderIcon)
+
 const OrdersStack = createStackNavigator({
     Orders
 })
@@ -73,7 +107,7 @@ const OrdersStack = createStackNavigator({
 OrdersStack.navigationOptions = {
     tabBarLabel: 'Orders',
     tabBarIcon: ({ focused }) => {
-        return <Ionicons name="ios-albums"  size={36} color = {focused ? color.ACTIVE : color.INACTIVE}/>
+        return <OrderIconConnected focused={focused} />
     }
 }
 
