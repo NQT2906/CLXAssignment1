@@ -25,6 +25,7 @@ class Cart extends Component {
                     //      />
                     : <Text>No items in your cart</Text>
                 }
+                {this.props.cartItems.length > 0 ?  
                 <View style = {styles.totalContainer}>
                     <Text style = {styles.totalInside}>Total: {totalPrice}₫</Text>
                     <TouchableOpacity onPress = {() => {
@@ -35,6 +36,8 @@ class Cart extends Component {
                         <Text style = {styles.totalPay}>Đặt hàng</Text>
                     </TouchableOpacity>
                 </View>
+                : <View></View>
+                }
             </View>
         );
     }

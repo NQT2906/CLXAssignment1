@@ -18,6 +18,9 @@ class Orders extends Component {
                         {Object.values(this.props.orderItems).map( cart => (
                             <ItemInOrder product = {cart} />
                         ))}
+                    <View style = {styles.totalContainer}>
+                        <Text style = {styles.totalInside}>Total: {totalPrice}₫</Text>
+                    </View>
                     </ScrollView>
                     // <FlatList 
                     //     data = {Object.values(this.props.cartItems)}
@@ -26,9 +29,6 @@ class Orders extends Component {
                     //      />
                     : <Text>No items in your orders</Text>
                 }
-                <View style = {styles.totalContainer}>
-                    <Text style = {styles.totalInside}>Total: {totalPrice}₫</Text>
-                </View>
             </View>
         );
     }

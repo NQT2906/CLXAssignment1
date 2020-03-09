@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
     cartText: {
         textTransform: 'uppercase',
         fontSize: 16,
-        color: '#2f95dc'
+        color: '#2f95dc',
+        backgroundColor: 'orange'
     },
 
     shadow: {
