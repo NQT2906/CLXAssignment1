@@ -1,11 +1,46 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, FlatList, ScrollView, Button} from "react-native";
+import { View, Text, StyleSheet, FlatList, ScrollView, Button, AsyncStorage} from "react-native";
 import ProductInCart from '../components/ProductInCart.js'
 import { connect } from 'react-redux'
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 class Cart extends Component {
 
+    setItemStorage = async (key, value) => {
+        try {
+            await AsyncStorage.setItem(key, JSON.stringify(value));
+            console.log('Saving data success!')
+        } 
+        catch (error) {
+            console.log('Saving data error!')
+        }
+    };
+
+    getItemStorage = async (key) => {   
+        try {     
+            const value = await AsyncStorage.multiGet(key); 
+            if (value !== null) {       
+                return Json.parse(value);
+            }
+            else {
+                console.log('Read data error!')
+            }   
+        } 
+        catch (error) {   
+            console.log('Read data error!')
+        }
+    };
+    
+    saveStorage = (value) => {
+
+        this.setItemStorage('value', value);
+    }
+
+    readStorage = () => {
+        return this.getItemStorage('value');
+    }
+
+    
     render() {
         const totalPrice = this.props.cartItems.reduce(function(accumulator, currentValue) {
             return accumulator + currentValue.price * currentValue.quantity;
@@ -13,17 +48,19 @@ class Cart extends Component {
         return (
             <View style={styles.container}>
                 {this.props.cartItems.length > 0 ?
-                   <ScrollView>
-                        {Object.values(this.props.cartItems).map( product => (
+                    <ScrollView>
+                        {(this.props.cartItems).map( product => (
                             <ProductInCart key = {product.id} product = {product} />
                         ))}
                     </ScrollView>
-                    // <FlatList 
-                    //     data = {Object.values(this.props.cartItems)}
-                    //     renderItem = {({item}) => <ProductInCart product = {item} />}
-                    //     keyExtractor = {item => '${item.id}'}
-                    //      />
-                    : <Text>No items in your cart</Text>
+                    : <View>
+                            <TouchableOpacity onPress = {this.saveStorage("123")}>
+                                <Text style = {{marginBottom: 50}}>Save</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress = {this.readStorage}>
+                                <Text>Read</Text>
+                            </TouchableOpacity>
+                        </View>
                 }
                 {this.props.cartItems.length > 0 ?  
                 <View style = {styles.totalContainer}>
@@ -43,16 +80,15 @@ class Cart extends Component {
     }
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
     return {
-        cartItems: store.getState().cartItems,
-        orderItems: store.getState().orderItems
+        cartItems: state.cartItems,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addCartToOrder: (cart) => dispatch({type: 'ADD_TO_ORDER', payload: cart}),
+        addCartToOrder: (product) => dispatch({type: 'ADD_TO_ORDER', payload: product}),
         deleteFromCart: (product) => dispatch({ type: 'DELETE_FROM_CART', payload: product})
     }
 }

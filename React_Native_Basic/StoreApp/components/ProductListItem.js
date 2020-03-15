@@ -22,11 +22,11 @@ function ProductListItem (props){
     );
 }
 
-// const mapStateToProps = () => {
-//     return {
-//         car
-//     }
-// }
+const mapStateToProps = () => {
+    return {
+        cartItems: store.getState().cartItems
+    }
+}
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -34,7 +34,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(ProductListItem);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductListItem);
 
 
 const styles = StyleSheet.create({

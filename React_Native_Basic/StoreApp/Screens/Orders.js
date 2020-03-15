@@ -1,26 +1,20 @@
 import React, { Component } from "react";
 import { View, Text, StyleSheet, FlatList, ScrollView, Button} from "react-native";
-import ItemInOrder from '../components/ItemInOrder.js'
+import CartInOrder from '../components/CartInOrder'
 import { connect } from 'react-redux'
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 class Orders extends Component {
 
     render() {
-        const totalPrice = this.props.orderItems.reduce(function(accumulator, currentValue) {
-            return accumulator + currentValue.price * currentValue.quantity;
-        }, 0)
+        console.log("Order: ----------------------")
+        console.log(this.props.orderItems)
         return (
             <View style={styles.container}>
                 {this.props.orderItems.length > 0 ?
                    <ScrollView>
-                       <Text>Order:</Text>
-                        {Object.values(this.props.orderItems).map( cart => (
-                            <ItemInOrder product = {cart} />
+                        { this.props.orderItems.map( cartItem => (
+                            <CartInOrder cartItem = {cartItem} />
                         ))}
-                    <View style = {styles.totalContainer}>
-                        <Text style = {styles.totalInside}>Total: {totalPrice}₫</Text>
-                    </View>
                     </ScrollView>
                     // <FlatList 
                     //     data = {Object.values(this.props.cartItems)}
@@ -34,9 +28,9 @@ class Orders extends Component {
     }
 }
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
     return {
-        orderItems: store.getState().orderItems
+        orderItems: state.orderItems,
     }
 }
 

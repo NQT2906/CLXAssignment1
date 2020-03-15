@@ -22,6 +22,7 @@ const cartItems = (state = [], action) => {
                 return [...state];
             }
         case 'DELETE_FROM_CART': {
+            state = state.map(product => product.quantity = 0);
             state = [];
             return [...state];
         }

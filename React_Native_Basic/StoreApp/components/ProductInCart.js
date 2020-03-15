@@ -14,8 +14,7 @@ function ProductInCart (props){
                     <Text style = {styles.name}>{product.name}</Text>
                 </View>
                 <View style = {styles.quantity} >
-                    <TouchableOpacity onPress = {() => {
-                        removeItemFromCart(product)}}>
+                    <TouchableOpacity onPress = {() => removeItemFromCart(product)}>
                         <Text style = {styles.quantityButton}>-</Text>
                     </TouchableOpacity>
                     <Text style = {styles.quantityProduct}>{product.quantity}</Text>
@@ -31,9 +30,9 @@ function ProductInCart (props){
     );
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
     return {
-        cartItems: state
+        cartItems: store.getState().cartItems
     }
 }
 

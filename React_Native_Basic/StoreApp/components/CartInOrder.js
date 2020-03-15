@@ -1,33 +1,32 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View, } from 'react-native';
+import { StyleSheet, Text, View, ScrollView} from 'react-native';
+import ProductInCart from './ProductInCart'
 
-export default function ItemInOrder (props){
-    const { product } = props;
- 
+export default function CartInOrder (props){
+    const { cartItem } = props;
+    console.log("CART: -------------------------")
+    console.log(cartItem)
+    const totalPrice = cartItem.reduce( function( accumulator, currentValue) {
+        return accumulator + currentValue.price * currentValue.quantity;
+    }, 0)
     return (
-        <View style = {styles.shadow}>
-            {/* <View>
-                <Text style = {styles.orderText}>Order:</Text>
-            </View> */}
-            <View style = {styles.container}>
-                <View>
-                    <Image style={styles.img} source={{uri: product.image}}/>
-                </View>
-                <View>
-                    <Text style = {styles.name}>{product.name}</Text>
-                </View>
-                <View style = {styles.priceRow}>
-                    
-                    <Text>{product.id}</Text>
-                    {/* <Text style = {styles.price}>{product.price*product.quantity}₫</Text> */}
-                </View>
+        <View>
+            <View>
+                <Text>Order:</Text>
+            </View>
+            <View>
+                <Text>
+                    {(cartItem).map( product => (
+                        <ProductInCart key = {product.id} product = {product} />
+                    ))}
+                </Text>
+            </View>
+            <View style = {styles.totalContainer}>
+                <Text style = {styles.totalInside}>Total: {totalPrice}₫</Text>
             </View>
         </View>
     );
 }
-
-
-//export default ProductInCart;
 
 const styles = StyleSheet.create({
     shadow: {
@@ -39,7 +38,6 @@ const styles = StyleSheet.create({
     },
 
     container: {
-        marginBottom: 10,
         marginTop: 20,
         borderRadius: 20,
         backgroundColor: '#FFF',
@@ -48,12 +46,6 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
         width: 390,
         height: 150,
-    },
-
-    orderText: {
-        top: 5,
-        fontSize: 20,
-        fontWeight: 'bold'
     },
 
     img: {
