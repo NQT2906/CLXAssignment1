@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
 
     container: {
         marginTop: 20,
-        borderRadius: 20,
         backgroundColor: '#FFF',
         flex: 1,
         flexDirection: 'row',

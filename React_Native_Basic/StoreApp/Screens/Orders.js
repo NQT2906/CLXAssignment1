@@ -6,14 +6,12 @@ import { connect } from 'react-redux'
 class Orders extends Component {
 
     render() {
-        console.log("Order: ----------------------")
-        console.log(this.props.orderItems)
         return (
             <View style={styles.container}>
                 {this.props.orderItems.length > 0 ?
                    <ScrollView>
                         { this.props.orderItems.map( cartItem => (
-                            <CartInOrder cartItem = {cartItem} />
+                            <CartInOrder cartItem= {cartItem} />
                         ))}
                     </ScrollView>
                     // <FlatList 
@@ -23,7 +21,7 @@ class Orders extends Component {
                     //      />
                     : <Text>No items in your orders</Text>
                 }
-            </View>
+                </View>
         );
     }
 }

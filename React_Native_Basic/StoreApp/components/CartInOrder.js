@@ -1,99 +1,54 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView} from 'react-native';
-import ProductInCart from './ProductInCart'
+import ItemInOrder from './ItemInOrder'
 
 export default function CartInOrder (props){
     const { cartItem } = props;
-    console.log("CART: -------------------------")
-    console.log(cartItem)
     const totalPrice = cartItem.reduce( function( accumulator, currentValue) {
         return accumulator + currentValue.price * currentValue.quantity;
     }, 0)
     return (
         <View>
-            <View>
-                <Text>Order:</Text>
+            <View style = {styles.orderContainer}>
+                <Text style = {styles.order}>Order:</Text>
             </View>
-            <View>
-                <Text>
-                    {(cartItem).map( product => (
-                        <ProductInCart key = {product.id} product = {product} />
-                    ))}
-                </Text>
+            {(cartItem).map( product => (
+                <ItemInOrder key = {product.id} product = {product} />
+            ))}
+            <View style = {styles.totalPriceContainer}>
+                <Text style = {styles.totalPrice}>Total: {totalPrice}₫</Text>
             </View>
-            <View style = {styles.totalContainer}>
-                <Text style = {styles.totalInside}>Total: {totalPrice}₫</Text>
+            <View style = {styles.dashed}>
+                <Text></Text>
             </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    shadow: {
-        elevation: 1,
-        shadowColor: '#000',
-        shadowOpacity: 0.1,
-        shadowRadius: 10,
-        shadowOffset: { width: 0, height: 0 }
-    },
-
-    container: {
+    orderContainer: {
         marginTop: 20,
-        borderRadius: 20,
-        backgroundColor: '#FFF',
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'stretch',
-        width: 390,
-        height: 150,
     },
 
-    img: {
-        height: 80,
-        width: 80,
-        marginTop: 30,
+    order: {
+        fontSize: 24,
+        fontWeight: 'bold',
+    },
+
+    totalPriceContainer: {
+        marginTop: 20,
     },
     
-    name: {
-        fontSize: 18,
+    totalPrice: {
+        fontSize: 24,
+        textAlign: 'right',
         fontWeight: 'bold',
-        marginVertical: 60,
-        marginLeft: 20
-    },
-    
-    quantity: {
-        marginTop: 55,
-        marginLeft: 40,
-        marginBottom: 55,
-        flexDirection: 'row',
-        borderColor: 'grey',
-        borderWidth: 1.5,
-        borderRadius: 0.5,
-        alignItems: 'center'
+        marginRight: 40,
     },
 
-    quantityProduct: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        paddingHorizontal: 7,
-    },
-
-    quantityButton: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        paddingHorizontal: 10
-    },
-    
-    priceRow: {
-        flexDirection: 'row',
-        alignItems: 'center'
-    },
-
-    price: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginVertical: 65,
-        marginLeft: 35
-    },
+    dashed: {
+        backgroundColor: 'black',
+        height: 2,
+    }
 
 });
