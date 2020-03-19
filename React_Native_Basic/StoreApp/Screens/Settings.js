@@ -5,12 +5,11 @@ export default class Settings extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View>
                 <View>
-                    <Image style={styles.img} source={{uri: 'https://imgur.com/OH656bu.jpg'}} />
+                    <Image style={styles.img} source={{uri: "https://imgur.com/iRldAlv.jpeg"}}/>
                 </View>
-                <View>
-                </View>
+                <Text>Tài khoản</Text>
             </View>
         );
     }
@@ -36,6 +35,9 @@ const styles = StyleSheet.create({
     },
 
     img: {
+        height: 80,
+        width: 80,
+        marginTop: 30,
     },
 
     totalInside: {

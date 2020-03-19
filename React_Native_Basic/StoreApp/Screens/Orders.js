@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, FlatList, ScrollView, Button} from "react-native";
+import { View, Text, StyleSheet, FlatList, ScrollView, Button, Image} from "react-native";
 import CartInOrder from '../components/CartInOrder'
 import { connect } from 'react-redux'
 
@@ -12,14 +12,16 @@ class Orders extends Component {
                    <ScrollView>
                         { this.props.orderItems.map( cartItem => (
                             <CartInOrder cartItem= {cartItem} />
-                        ))}
+                            ))}
                     </ScrollView>
                     // <FlatList 
                     //     data = {Object.values(this.props.cartItems)}
                     //     renderItem = {({item}) => <ProductInCart product = {item} />}
                     //     keyExtractor = {item => '${item.id}'}
                     //      />
-                    : <Text>No items in your orders</Text>
+                    : <View>
+                        <Text>No items in your orders</Text>
+                    </View>
                 }
                 </View>
         );

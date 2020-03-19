@@ -6,45 +6,35 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 class Cart extends Component {
 
-    setItemStorage = async (key, value) => {
-        try {
-            await AsyncStorage.setItem(key, JSON.stringify(value));
-            console.log('Saving data success!')
-        } 
-        catch (error) {
-            console.log('Saving data error!')
-        }
+    async setItemStorage(cart) {
+        AsyncStorage.setItem('cart', JSON.stringify(cart));
     };
 
-    getItemStorage = async (key) => {   
+    async getItemStorage() {   
         try {     
-            const value = await AsyncStorage.multiGet(key); 
-            if (value !== null) {       
-                return Json.parse(value);
-            }
-            else {
-                console.log('Read data error!')
-            }   
+            let cart = await AsyncStorage.getItem('cart'); 
+            let parsed = JSON.parse(cart)
+            // console.log('Promise:---------------------------')
+            // console.log(Promise.resolve(parsed))
+            // arr = Promise.resolve(parsed);
+
+            return parsed;
         } 
         catch (error) {   
-            console.log('Read data error!')
+            alert('Read data error!')
         }
     };
-    
-    saveStorage = (value) => {
 
-        this.setItemStorage('value', value);
-    }
+    render() { 
+        this.setItemStorage(this.props.cartItems);
+        let arr =  this.getItemStorage()
+        console.log("Arr:-------------------------------")
+        arr.then(result => console.log(result))
 
-    readStorage = () => {
-        return this.getItemStorage('value');
-    }
-
-    
-    render() {
         const totalPrice = this.props.cartItems.reduce(function(accumulator, currentValue) {
             return accumulator + currentValue.price * currentValue.quantity;
         }, 0)
+
         return (
             <View style={styles.container}>
                 {this.props.cartItems.length > 0 ?
@@ -54,13 +44,8 @@ class Cart extends Component {
                         ))}
                     </ScrollView>
                     : <View>
-                            <TouchableOpacity onPress = {this.saveStorage("123")}>
-                                <Text style = {{marginBottom: 50}}>Save</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity onPress = {this.readStorage}>
-                                <Text>Read</Text>
-                            </TouchableOpacity>
-                        </View>
+                        <Text>No items in your cart</Text>
+                    </View>
                 }
                 {this.props.cartItems.length > 0 ?  
                 <View style = {styles.totalContainer}>

@@ -51,7 +51,7 @@ export default class Category extends React.Component {
                 <ProductListItem product = {item}
                   onPress = {() => this.props.onPress(item)} />
               </View> }
-            keyExtractor = {item => '${item.id}'}
+            keyExtractor = {item => JSON.stringify(item)}
             contentContainerStyle ={styles.container} />
         </View>
       </View>

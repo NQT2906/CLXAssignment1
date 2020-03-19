@@ -48,7 +48,7 @@ export default class Categories extends React.Component {
               categorySpecies: item.id,
             })
           } />}
-        keyExtractor = {item => '${item.id}'}
+        keyExtractor = {item => JSON.stringify(item)}
         contentContainerStyle ={styles.container}
       />
     );
