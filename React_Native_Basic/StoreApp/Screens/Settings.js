@@ -27,6 +27,8 @@ export default class Settings extends Component {
 
     render() {
         const { navigation } = this.props;
+        this.getItemStorage('userName').then(result => this.setState({userName: result}))
+        this.getItemStorage('email').then(result => this.setState({email: result}))
         this.getItemStorage('signIn').then(result => this.setState({signIn: result}))
         return (
             <View>
@@ -42,7 +44,8 @@ export default class Settings extends Component {
                     :<View>
                         <View style = {styles.container}>
                             <Image style = {styles.categoryImage} source = {{uri: 'https://imgur.com/OH656bu.jpg' }} />
-                            <Text style = {styles.title}>123</Text>
+                            <Text style = {styles.title}>{this.state.userName}</Text>
+                            <Text style = {styles.title}>{this.state.email}</Text>
                         </View>
                     </View>
                 }
