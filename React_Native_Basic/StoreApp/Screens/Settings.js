@@ -1,59 +1,91 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, ScrollView, Image, } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, } from "react-native";
+import SignUp from './SignUp'
+import SignIn from './SignIn'
+
 
 export default class Settings extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            userName: "",
+            email: "",
+            password: "",
+            created: false
+        }
+    }
+
+    async setItemStorage(cart) {
+        await AsyncStorage.setItem('cart', JSON.stringify(cart));
+    };
+
+    async getItemStorage() {   
+        try {     
+            let cart = await AsyncStorage.getItem('cart'); 
+            let parsed = await JSON.parse(cart)
+            this.setState({cartArr: parsed})
+            return parsed;
+        } 
+        catch (error) {   
+            console.log('Read data error!')
+        }
+    };
+
+    
+
     render() {
+        const { navigation } = this.props;
         return (
             <View>
-                <View>
-                    <Image style={styles.img} source={{uri: "https://imgur.com/iRldAlv.jpeg"}}/>
-                </View>
-                <Text>Tài khoản</Text>
+                {this.state.created === false ?
+                    <View  style = {styles.container}>
+                        <TouchableOpacity onPress = {() => navigation.navigate('SignIn')} >
+                            <Text style = {styles.button}>Sign in</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress = {() => navigation.navigate('SignUp')}>
+                            <Text style = {styles.button}>Sign up</Text>
+                        </TouchableOpacity>
+                    </View>
+                    :<View>
+                        <View style = {styles.container}>
+                            <Image style = {styles.categoryImage} source = {{uri: 'https://imgur.com/OH656bu.jpg' }} />
+                            <Text style = {styles.title}>123</Text>
+                        </View>
+                    </View>
+                }
             </View>
-        );
+        );  
     }
 }
 
 const styles = StyleSheet.create({
-    shadow: {
-        elevation: 1,
-        shadowColor: '#000',
-        shadowOpacity: 0.1,
-        shadowRadius: 10,
-        shadowOffset: { width: 0, height: 0 }
-    },
 
-    container: {
-        marginTop: 20,
-        backgroundColor: '#FFF',
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: 'stretch',
-        width: 390,
-        height: 150,
+    container:
+    {
+        height: 100,
+        top: 200
     },
-
-    img: {
-        height: 80,
-        width: 80,
-        marginTop: 30,
+    categoryImage:
+    {
+        width: 120,
+        height: 120
     },
-
-    totalInside: {
-        fontSize: 28,
-        fontWeight: 'bold',
-        marginTop: 27,
-        marginLeft: 20,
+    title:
+    {
+        textTransform: 'uppercase',
+        marginBottom: 8,
+        fontWeight: '700'
     },
-
-    totalPay: {
-        fontSize: 28,
-        fontWeight: 'bold',
-        marginTop: 30,
-        marginLeft: 20,
-        color: 'white',
-        backgroundColor: 'orange'
-    }
+    button: {
+        fontSize: 20,
+        color: '#2f95dc',
+        marginLeft: 145,
+        marginTop: 50,
+        textAlign: 'center',
+        width: 110,
+        fontSize: 32,
+        backgroundColor: '#fafafa',
+    },
 
 });

@@ -6,31 +6,42 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 class Cart extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            cartArr: [],
+        }
+    }
+
     async setItemStorage(cart) {
-        AsyncStorage.setItem('cart', JSON.stringify(cart));
+        await AsyncStorage.setItem('cart', JSON.stringify(cart));
     };
 
     async getItemStorage() {   
         try {     
             let cart = await AsyncStorage.getItem('cart'); 
-            let parsed = JSON.parse(cart)
-            // console.log('Promise:---------------------------')
-            // console.log(Promise.resolve(parsed))
-            // arr = Promise.resolve(parsed);
-
+            let parsed = await JSON.parse(cart)
+            this.setState({cartArr: parsed})
             return parsed;
         } 
         catch (error) {   
-            alert('Read data error!')
+            console.log('Read data error!')
         }
     };
+    
+    UNSAFE_componentWillMount() {
+        this.getItemStorage()
+    }
 
     render() { 
-        this.setItemStorage(this.props.cartItems);
-        let arr =  this.getItemStorage()
-        console.log("Arr:-------------------------------")
-        arr.then(result => console.log(result))
-
+        if(this.props.cartItems.length !== 0 && this.state.cartArr.length === 0) {
+            this.setItemStorage(this.props.cartItems)
+            this.getItemStorage()
+        }
+        else if(this.props.cartItems.length === 0 && this.state.cartArr.length !== 0) {
+            this.props.cartItems = this.state.cartArr
+        }
+        
         const totalPrice = this.props.cartItems.reduce(function(accumulator, currentValue) {
             return accumulator + currentValue.price * currentValue.quantity;
         }, 0)
@@ -53,6 +64,7 @@ class Cart extends Component {
                     <TouchableOpacity onPress = {() => {
                         this.props.addCartToOrder(this.props.cartItems),
                         this.props.deleteFromCart(this.props.cartItems),
+                        this.setState({cartArr: []}),
                         alert('Đặt hàng thành công')
                         }}>
                         <Text style = {styles.totalPay}>Đặt hàng</Text>
@@ -73,6 +85,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        addToCart: (product) => dispatch({type: "ADD_TO_CART", payload: product}),
         addCartToOrder: (product) => dispatch({type: 'ADD_TO_ORDER', payload: product}),
         deleteFromCart: (product) => dispatch({ type: 'DELETE_FROM_CART', payload: product})
     }

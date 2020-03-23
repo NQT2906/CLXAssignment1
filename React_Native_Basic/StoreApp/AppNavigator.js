@@ -8,8 +8,9 @@ import Categories from './Screens/Categories.js';
 import Cart from './Screens/Cart.js';
 import Orders from './Screens/Orders.js';
 import Settings from './Screens/Settings.js';
+import SignUp from './Screens/SignUp.js';
+import SignIn from './Screens/SignIn.js';
 import { connect } from 'react-redux'
-import store from './store'
 
 const CategoryStack = createStackNavigator({
     Categories: {
@@ -62,8 +63,8 @@ const CartIcon = function(props) {
 
 const mapStateToProps = (state) => {
     return {
-        cartItems: store.getState().cartItems,
-        orderItems: store.getState().orderItems
+        cartItems: state.cartItems,
+        orderItems: state.orderItems
     }
 }
 const CartIconConnected = connect(mapStateToProps)(CartIcon)
@@ -113,7 +114,15 @@ OrdersStack.navigationOptions = {
 
 
 const SettingsStack = createStackNavigator({
-    Settings
+    Settings: {
+        screen: Settings
+    },
+    SignUp: {
+        screen: SignUp
+    },
+    SignIn: {
+        screen: SignIn
+    }
 })
 
 SettingsStack.navigationOptions = {

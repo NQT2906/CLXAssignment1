@@ -45,7 +45,6 @@ export default class Categories extends React.Component {
           onPress = {() => 
             navigation.navigate('Category', {
               categoryName: item.name,
-              categorySpecies: item.id,
             })
           } />}
         keyExtractor = {item => JSON.stringify(item)}

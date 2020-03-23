@@ -48,8 +48,7 @@ export default class Category extends React.Component {
             numColumns = {2}
             renderItem = {({item}) => 
               <View style = {styles.wrapper}>
-                <ProductListItem product = {item}
-                  onPress = {() => this.props.onPress(item)} />
+                <ProductListItem product = {item}/>
               </View> }
             keyExtractor = {item => JSON.stringify(item)}
             contentContainerStyle ={styles.container} />

@@ -10,8 +10,10 @@
     "mock-server": "json-server ./mock-db/db.json"
   },
   "dependencies": {
+    "@mobiscroll/cli": "^1.4.0",
     "@react-native-community/masked-view": "^0.1.5",
     "@react-navigation/native": "^5.0.7",
+    "axios": "^0.19.2",
     "expo": "^36.0.2",
     "install": "^0.13.0",
     "mockserver": "^3.1.1",
@@ -28,8 +30,7 @@
     "react-navigation-stack": "^2.1.1",
     "react-navigation-tabs": "^2.8.1",
     "react-redux": "^7.2.0",
-    "redux": "^4.0.5",
-    "axios": "^0.19.2"
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
