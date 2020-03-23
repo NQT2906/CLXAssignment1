@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { StyleSheet, Text, View, TextInput, TouchableOpacity} from 'react-native'
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, AsyncStorage} from 'react-native'
 
 export default class SignUp extends Component {
     
@@ -9,38 +9,37 @@ export default class SignUp extends Component {
             userName: "",
             email: "",
             password: "",
-            created: false
         }
     }
 
-    async setItemStorage(cart) {
-        await AsyncStorage.setItem('cart', JSON.stringify(cart));
+    async setItemStorage(key, value) {
+        await AsyncStorage.setItem(key, value);
     };
 
-    async getItemStorage() {   
-        try {     
-            let cart = await AsyncStorage.getItem('cart'); 
-            let parsed = await JSON.parse(cart)
-            this.setState({cartArr: parsed})
-            return parsed;
-        } 
-        catch (error) {   
-            console.log('Read data error!')
-        }
-    };
+
 
     render() {
+        const { navigation } = this.props;
         return (
             <View style = {styles.SignUp}>
                 <Text style = {styles.header}>Sign up</Text>
-                <TextInput style = {styles.textInput} placeholder = "Your name" underlineColorAndroid ={'transparent'}/>
+                <TextInput style = {styles.textInput} placeholder = "Your name" underlineColorAndroid ={'transparent'}
+                onChangeText = {text => this.setState({userName: text}) }/>
 
-                <TextInput style = {styles.textInput} placeholder = "Your email" underlineColorAndroid ={'transparent'}/>
+                this.setItemStorage('userName', this.state.userName)
+
+                <TextInput style = {styles.textInput} placeholder = "Your email" underlineColorAndroid ={'transparent'}
+                onChangeText = {text => this.setState({email: text}) }/>
+
+                this.setItemStorage('email', this.state.email)
 
                 <TextInput style = {styles.textInput} placeholder = "Your password" 
-                secureTextEntry={true} underlineColorAndroid ={'transparent'}/>
+                secureTextEntry={true} underlineColorAndroid ={'transparent'}
+                onChangeText = {text => this.setState({password: text}) }/>
 
-                <TouchableOpacity style = {styles.button}>
+                this.setItemStorage('password', this.state.password)
+
+                <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('Settings')}>
                     <Text style = {styles.btnText}>Sign up</Text>
                 </TouchableOpacity>
             </View>

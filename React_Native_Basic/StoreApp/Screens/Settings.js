@@ -12,30 +12,22 @@ export default class Settings extends Component {
             userName: "",
             email: "",
             password: "",
-            created: false
+            signIn: 'false'
         }
     }
 
-    async setItemStorage(cart) {
-        await AsyncStorage.setItem('cart', JSON.stringify(cart));
-    };
-
-    async getItemStorage() {   
+    async getItemStorage(key) {   
         try {     
-            let cart = await AsyncStorage.getItem('cart'); 
-            let parsed = await JSON.parse(cart)
-            this.setState({cartArr: parsed})
-            return parsed;
+            return await AsyncStorage.getItem(key); 
         } 
         catch (error) {   
             console.log('Read data error!')
         }
     };
 
-    
-
     render() {
         const { navigation } = this.props;
+        this.getItemStorage('signIn').then(result => this.setState({signIn: result}))
         return (
             <View>
                 {this.state.created === false ?
