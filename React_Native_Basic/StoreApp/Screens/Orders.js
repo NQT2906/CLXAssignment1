@@ -35,27 +35,16 @@ class Orders extends Component {
 
     UNSAFE_componentWillMount() {
         this.getItemStorage()
+        this.props.orderItems = this.state.orderArr.slice();
     }
 
     render() {
-        if(this.props.orderItems.length !== 0 && this.state.orderArr.length === 0) {
-            this.setItemStorage(this.props.orderItems)
-            this.getItemStorage()
-        }
-        else if(this.props.orderItems.length === 0 && this.state.orderArr.length !== 0) {
-            this.props.orderItems = [...this.props.orderItems, this.state.orderArr]
-            console.log("Order:---------------------------------------------")
-            console.log(this.props.orderItems)
-            console.log(this.state.orderArr)
-        }
+        this.setItemStorage(this.props.orderItems)
         return (
             <View style={styles.container}>
-                {this.props.orderItems.length > 0 || this.state.orderArr.length > 0 ?
+                {this.props.orderItems.length > 0 ?
                    <ScrollView>
                         { this.props.orderItems.map( cartItem => (
-                            <CartInOrder cartItem= {cartItem} />
-                        ))}
-                        { this.state.orderArr.map( cartItem => (
                             <CartInOrder cartItem= {cartItem} />
                         ))}
                     </ScrollView>
@@ -79,8 +68,14 @@ const mapStateToProps = (state) => {
     }
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addCartToOrder: (product) => dispatch({type: 'ADD_TO_ORDER', payload: product}),
+        deleteFromCart: (product) => dispatch({ type: 'DELETE_FROM_CART', payload: product})
+    }
+}
 
-export default connect(mapStateToProps)(Orders);
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);
 
 const styles = StyleSheet.create({
     container: {

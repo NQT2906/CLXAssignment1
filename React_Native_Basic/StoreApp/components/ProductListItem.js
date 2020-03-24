@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import { connect } from 'react-redux'
+import { render } from 'react-dom';
 
-function ProductListItem (props){
-    const { product, addItemToCart } = props;
-    return (
-        <View style={styles.shadow}>
-            <View style={styles.container}>
-                <Image style={styles.img} source={{uri: product.image}}/>
-                <View style={styles.info}>
-                    <Text style={styles.name}>{product.name}</Text>
-                    <View style={styles.priceRow}>
-                        <Text style={styles.price}>{product.price}</Text>
-                        <TouchableOpacity onPress = {() => addItemToCart(product)} >
-                            <Text style={styles.cartText}>Mua +</Text>
-                        </TouchableOpacity>
+class ProductListItem extends Component{
+    render() {
+        return (
+            <View style={styles.shadow}>
+                <View style={styles.container}>
+                    <Image style={styles.img} source={{uri: this.props.product.image}}/>
+                    <View style={styles.info}>
+                        <Text style={styles.name}>{this.props.product.name}</Text>
+                        <View style={styles.priceRow}>
+                            <Text style={styles.price}>{this.props.product.price}</Text>
+                            <TouchableOpacity onPress = {() => this.props.addItemToCart(this.props.product)} >
+                                <Text style={styles.cartText}>Mua +</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </View>
-        </View>
-    );
+        );
+    }
 }
 
 const mapStateToProps = () => {
