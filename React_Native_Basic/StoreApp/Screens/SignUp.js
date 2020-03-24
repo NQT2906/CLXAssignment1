@@ -24,20 +24,14 @@ export default class SignUp extends Component {
             <View style = {styles.SignUp}>
                 <Text style = {styles.header}>Sign up</Text>
                 <TextInput style = {styles.textInput} placeholder = "Your name" underlineColorAndroid ={'transparent'}
-                onChangeText = {text => this.setState({userName: text}) }/>
-
-                this.setItemStorage('userName', this.state.userName)
+                onChangeText = {text => this.setItemStorage('userName', text) }/>
 
                 <TextInput style = {styles.textInput} placeholder = "Your email" underlineColorAndroid ={'transparent'}
-                onChangeText = {text => this.setState({email: text}) }/>
-
-                this.setItemStorage('email', this.state.email)
+                onChangeText = {text => this.setItemStorage('email', text)}/>
 
                 <TextInput style = {styles.textInput} placeholder = "Your password" 
                 secureTextEntry={true} underlineColorAndroid ={'transparent'}
-                onChangeText = {text => this.setState({password: text}) }/>
-
-                this.setItemStorage('password', this.state.password)
+                onChangeText = {text => this.setItemStorage('password', text) }/>
 
                 <TouchableOpacity style = {styles.button} onPress = {() => navigation.navigate('Settings')}>
                     <Text style = {styles.btnText}>Sign up</Text>

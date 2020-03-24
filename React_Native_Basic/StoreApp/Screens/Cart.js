@@ -14,14 +14,19 @@ class Cart extends Component {
     }
 
     async setItemStorage(cart) {
+        try {
         await AsyncStorage.setItem('cart', JSON.stringify(cart));
+        }
+        catch(error) {
+            console.log('Set data error!')
+        }
     };
 
     async getItemStorage() {   
         try {     
             let cart = await AsyncStorage.getItem('cart'); 
             let parsed = await JSON.parse(cart)
-            this.setState({cartArr: parsed})
+            await this.setState({cartArr: parsed})
             return parsed;
         } 
         catch (error) {   
@@ -40,16 +45,21 @@ class Cart extends Component {
         }
         else if(this.props.cartItems.length === 0 && this.state.cartArr.length !== 0) {
             this.props.cartItems = this.state.cartArr
+            console.log(this.props.cartItems);
         }
-        
         const totalPrice = this.props.cartItems.reduce(function(accumulator, currentValue) {
+            return accumulator + currentValue.price * currentValue.quantity;
+        }, 0) + this.state.cartArr.reduce(function(accumulator, currentValue) {
             return accumulator + currentValue.price * currentValue.quantity;
         }, 0)
 
         return (
             <View style={styles.container}>
-                {this.props.cartItems.length > 0 ?
+                {this.state.cartArr.length > 0 || this.props.cartItems.length > 0 ?
                     <ScrollView>
+                        {(this.state.cartArr).map( product => (
+                            <ProductInCart key = {product.id} product = {product} />
+                        ))}
                         {(this.props.cartItems).map( product => (
                             <ProductInCart key = {product.id} product = {product} />
                         ))}
@@ -58,12 +68,13 @@ class Cart extends Component {
                         <Text>No items in your cart</Text>
                     </View>
                 }
-                {this.props.cartItems.length > 0 ?  
+                {this.props.cartItems.length || this.state.cartArr.length > 0 ?  
                 <View style = {styles.totalContainer}>
                     <Text style = {styles.totalInside}>Total: {totalPrice}₫</Text>
                     <TouchableOpacity onPress = {() => {
                         this.props.addCartToOrder(this.props.cartItems),
                         this.props.deleteFromCart(this.props.cartItems),
+                        this.setItemStorage([]),
                         this.setState({cartArr: []}),
                         alert('Đặt hàng thành công')
                         }}>

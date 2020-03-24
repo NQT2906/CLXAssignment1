@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image, } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, AsyncStorage} from "react-native";
 import SignUp from './SignUp'
 import SignIn from './SignIn'
 
@@ -16,50 +16,67 @@ export default class Settings extends Component {
         }
     }
 
-    async getItemStorage(key) {   
-        try {     
-            return await AsyncStorage.getItem(key); 
-        } 
-        catch (error) {   
+    async getItemStorage(key) {
+        try {
+            return await AsyncStorage.getItem(key);
+        }
+        catch (error) {
             console.log('Read data error!')
         }
     };
 
-    render() {
-        const { navigation } = this.props;
+    UNSAFE_componentWillMount() {
         this.getItemStorage('userName').then(result => this.setState({userName: result}))
         this.getItemStorage('email').then(result => this.setState({email: result}))
         this.getItemStorage('signIn').then(result => this.setState({signIn: result}))
+    }
+
+    render() {
+        const { navigation } = this.props;
         return (
             <View>
-                {this.state.created === false ?
-                    <View  style = {styles.container}>
-                        <TouchableOpacity onPress = {() => navigation.navigate('SignIn')} >
-                            <Text style = {styles.button}>Sign in</Text>
+                {this.state.signIn === 'false' ?
+                    <View  style = {styles.containerSign}>
+                        <TouchableOpacity onPress = {() => navigation.navigate('SignIn')}  style = {styles.button} >
+                            <Text style = {styles.btnText}>Sign in</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress = {() => navigation.navigate('SignUp')}>
-                            <Text style = {styles.button}>Sign up</Text>
+                        <TouchableOpacity onPress = {() => navigation.navigate('SignUp')}  style = {styles.button}>
+                            <Text style = {styles.btnText}>Sign up</Text>
                         </TouchableOpacity>
                     </View>
-                    :<View>
+                    :
+                    <View>
                         <View style = {styles.container}>
                             <Image style = {styles.categoryImage} source = {{uri: 'https://imgur.com/OH656bu.jpg' }} />
-                            <Text style = {styles.title}>{this.state.userName}</Text>
-                            <Text style = {styles.title}>{this.state.email}</Text>
+                            <Text style = {styles.title}>Your user name: {this.state.userName}</Text>
+                            <Text style = {styles.title}>Your email: {this.state.email}</Text>
+                            <Text style = {styles.title}>Your ID: 123456789</Text>
                         </View>
                     </View>
                 }
             </View>
-        );  
+        );
     }
 }
 
 const styles = StyleSheet.create({
 
+    containerSign:{
+        backgroundColor: '#FFF',
+        height: 800,
+    },
+
     container:
     {
-        height: 100,
-        top: 200
+        alignItems: 'center',
+        padding: 16,
+        elevation: 1,
+        backgroundColor: '#FFF',
+        shadowColor: '#000',
+        shadowOpacity: 0.3,
+        shadowRadius: 10,
+        marginBottom: 16,
+        height: 800
     },
     categoryImage:
     {
@@ -73,14 +90,16 @@ const styles = StyleSheet.create({
         fontWeight: '700'
     },
     button: {
-        fontSize: 20,
-        color: '#2f95dc',
         marginLeft: 145,
         marginTop: 50,
+        top: 190,
         textAlign: 'center',
         width: 110,
-        fontSize: 32,
         backgroundColor: '#fafafa',
     },
+    btnText: {
+        fontSize: 32,
+        color: '#2f95dc',
+    }
 
 });

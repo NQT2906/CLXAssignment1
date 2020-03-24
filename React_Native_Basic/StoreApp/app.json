@@ -24,6 +24,8 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.TCompany.ShoppingOnline",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {

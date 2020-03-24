@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, Text } from 'react-native';
+import { Image, View, Text, AsyncStorage } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';

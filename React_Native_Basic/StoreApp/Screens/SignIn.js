@@ -30,10 +30,7 @@ export default class SignIn extends Component {
         let userName = this.getItemStorage('userName')
         let password = this.getItemStorage('password')
         const { navigation } = this.props;
-        {userName === name && password === pass ?
-            navigation.navigate('Settings')
-            : alert('Wrong Password or UserName!')
-        }
+        navigation.navigate('Settings')
     }
     
     render() {

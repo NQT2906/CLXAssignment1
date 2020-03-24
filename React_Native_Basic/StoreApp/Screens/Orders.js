@@ -13,14 +13,19 @@ class Orders extends Component {
     }
 
     async setItemStorage(order) {
-        await AsyncStorage.setItem('order', JSON.stringify(order));
+        try {
+            await AsyncStorage.setItem('order', JSON.stringify(order));
+        }
+        catch(error) {
+            console.log('Set data error!')
+        }
     };
 
     async getItemStorage() {   
         try {     
             let order = await AsyncStorage.getItem('order'); 
             let parsed = await JSON.parse(order)
-            this.setState({orderArr: parsed})
+            await this.setState({orderArr: parsed})
             return parsed;
         } 
         catch (error) {   
@@ -31,22 +36,28 @@ class Orders extends Component {
     UNSAFE_componentWillMount() {
         this.getItemStorage()
     }
-    
+
     render() {
         if(this.props.orderItems.length !== 0 && this.state.orderArr.length === 0) {
             this.setItemStorage(this.props.orderItems)
             this.getItemStorage()
         }
         else if(this.props.orderItems.length === 0 && this.state.orderArr.length !== 0) {
-            this.props.orderItems = this.state.orderArr
+            this.props.orderItems = [...this.props.orderItems, this.state.orderArr]
+            console.log("Order:---------------------------------------------")
+            console.log(this.props.orderItems)
+            console.log(this.state.orderArr)
         }
         return (
             <View style={styles.container}>
-                {this.props.orderItems.length > 0 ?
+                {this.props.orderItems.length > 0 || this.state.orderArr.length > 0 ?
                    <ScrollView>
                         { this.props.orderItems.map( cartItem => (
                             <CartInOrder cartItem= {cartItem} />
-                            ))}
+                        ))}
+                        { this.state.orderArr.map( cartItem => (
+                            <CartInOrder cartItem= {cartItem} />
+                        ))}
                     </ScrollView>
                     // <FlatList 
                     //     data = {Object.values(this.props.cartItems)}
